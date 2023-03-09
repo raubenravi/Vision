@@ -1,8 +1,7 @@
 from skimage import data
 import matplotlib.pyplot as plt
-from skimage import data
-from skimage.color import rgb2hsv
 from skimage.viewer import ImageViewer
+import skimage.io as io
 
 #image = io.imread('C:/Users/ruben/Downloads/len_full.jpg')
 #imageOrg = io.imread('C:/Users/ruben/Downloads/len_full.jpg')
