@@ -1,10 +1,12 @@
 from skimage import data
 import matplotlib.pyplot as plt
-from skimage.viewer import ImageViewer
+import skimage
 import skimage.io as io
 
 #image = io.imread('C:/Users/ruben/Downloads/len_full.jpg')
 #imageOrg = io.imread('C:/Users/ruben/Downloads/len_full.jpg')
+from skimage.color import rgb2hsv
+
 image = data.astronaut()
 
 
@@ -58,13 +60,15 @@ def HiglightColor(image):
 
 image = data.astronaut()
 HiglightColor(image)
-viewer = ImageViewer(HiglightColor(image))
-viewer.show()
+skimage.io.imshow(HiglightColor(image))
+plt.show()
+1#viewer.show()
 
 hsv_img = rgb2hsv(image)
-hue_img = hsv_img[:, :, 0]
-viewer = ImageViewer(hue_img)
-viewer.show()
+hue_img = hsv_img[:, :, -1]
+viewer = skimage.io.imshow(hue_img)
+plt.show()
+#viewer.show()
 
 
 fig, (ax0, ax1) = plt.subplots(ncols=2, figsize=(8, 3))
