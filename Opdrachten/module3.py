@@ -26,8 +26,6 @@ def apllyMaskAndShow(img, mask):
 
 #opdracht 1, first just the standard lubrary filter
 image = data.camera()
-#image = io.imread('C:/Users/ruben/Downloads/len_full.jpg')
-#image = rgb2gray(image)
 image = filters.sobel(image)
 viewer = ImageViewer(image)
 viewer.show()
@@ -47,8 +45,7 @@ apllyMaskAndShow(image, mask3)
 apllyMaskAndShow(image, mask4)
 
 #opdracht 3
-#image = io.imread('C:/Users/ruben/Downloads/len_full.jpg')
-#image = rgb2gray(image)
+
 image = feature.canny(image, sigma=1.9)
 viewer = ImageViewer(image)
 viewer.show()
