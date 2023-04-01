@@ -1,13 +1,5 @@
 
-from skimage import data
 import matplotlib.pyplot as plt
-import skimage.io as io
-import tensorflow as tf
-import numpy as np
-from skimage.color import rgb2gray
-from skimage.util import view_as_blocks
-from skimage.util import view_as_windows
-from skimage.transform import rescale, resize, downscale_local_mean
 from skimage.morphology import square
 import skimage.morphology
 

@@ -57,8 +57,8 @@ for i in range(3) :
                 if (patch.shape != (patch_size[0], patch_size[1], 1)):
                     continue
                 patches.append(patch)
-                #label = np.reshape(mask[i][j][0], 1)[0]
-                label =  np.reshape(mask[i][j][0], (1,1))[0]
+                label = np.reshape(mask[i][j][0], 1)[0]
+                #label =  np.reshape(mask[i][j][0], (1,1))[0]
                 #print(label.shape)
                 labels.append(label)
 
@@ -70,7 +70,7 @@ for i in range(3) :
 #labels.append(0)
 patches = np.array(patches)
 labels = np.array(labels)
-labels = np.expand_dims(np.expand_dims(labels, -2), -2)
+
 print(patches[0].shape)
 print("should be the shape")
 # Train the model on the patches and labels
@@ -111,17 +111,17 @@ plt.show()
 #image = tf.expand_dims(image, 0)
 print(image.shape)
 
-# patches = []
-# for i in range(0, image.shape[0]-patch_size[0]):
-#     for j in range(0, image.shape[1]-patch_size[1]):
-#         patch = image[i:i+patch_size[0], j:j+patch_size[1]]
-#         if (patch.shape != (int(patch_size[0]), int(patch_size[1]), 1)):
-#             patch = np.zeros((int(patch_size[0]), int(patch_size[1]), 1))
-#             #print(i,j)
-#             #continue
-#         #patch = resize(patch, (32*32 , 1))
-#         patch = tf.image.resize(patch, (  int(patch_size[0]) , int(patch_size[1])) )
-#         patches.append(patch)
+patches = []
+for i in range(0, image.shape[0]-patch_size[0]):
+    for j in range(0, image.shape[1]-patch_size[1]):
+        patch = image[i:i+patch_size[0], j:j+patch_size[1]]
+        if (patch.shape != (int(patch_size[0]), int(patch_size[1]), 1)):
+            patch = np.zeros((int(patch_size[0]), int(patch_size[1]), 1))
+            #print(i,j)
+            #continue
+        #patch = resize(patch, (32*32 , 1))
+        patch = tf.image.resize(patch, (  int(patch_size[0]) , int(patch_size[1])) )
+        patches.append(patch)
 
 patches = np.array(image)
 preds = model.predict(image)
