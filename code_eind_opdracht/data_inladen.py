@@ -7,8 +7,6 @@ def load_image(image_name, path):
     image = io.imread(path + image_name)[:,:,:3]
     return image
 
-
-
 def load_mask(mask_name, path):
     mask = tf.io.read_file(path + mask_name)
     mask = tf.io.decode_png(mask, channels=1)
@@ -48,5 +46,10 @@ def load_single_image(image_number,  path="./data"):
     path_meta_data = path + "/metadata.csv"
     df_meta_data = pd.read_csv(path_meta_data)
     row = df_meta_data.loc[image_number]
-    #print(row['Image'])
     return load_image(row['Image'], path + "/Image/")
+
+def load_single_mask(mask_number,  path="./data"):
+    path_meta_data = path + "/metadata.csv"
+    df_meta_data = pd.read_csv(path_meta_data)
+    row = df_meta_data.loc[mask_number]
+    return load_mask(row['Mask'], path + "/Mask/")

@@ -28,20 +28,23 @@ def FilterImage(img = None, grayscale = True, Relu = True, Kmean=True, n_colors 
     new_image = recreate_image(kmeans.cluster_centers_, labels, w, h)
     return new_image
 
-def get_trainings_patches(complete_list):
+def get_trainings_patches(complete_list, patch_size = (32,32), extra_layer_bool = True ):
     train_label_array = []
-    patch_size = (32, 32)
+    #patch_size = (32, 32)
     patches = []
     labels = []
     for image_number in range(len(complete_list[0])):
         image = complete_list[0][image_number]
         mask = complete_list[1][image_number]
         extra_layer = complete_list[2][image_number]
-        image = FilterImage(image)
+        w, h ,d = original_shape = tuple(image.shape)
+        image = rgb2gray(image)
+        image = np.array(image, dtype=np.float64)
+        image = np.reshape(image, (w,h,1))
+        #image = rgb2gray(image)
         extra_layer = np.array(extra_layer, dtype=np.float64)
-        #image = np.array(image, dtype=np.float64) / 255
-        for i in range(patch_size[0] + 1, image.shape[0], patch_size[0]):
-            for j in range(patch_size[1] + 1, image.shape[1], patch_size[1]):
+        for i in range(patch_size[0] + 1, image.shape[0], 32):
+            for j in range(patch_size[1] + 1, image.shape[1], 32):
                 patch = image[i - int(patch_size[0] / 2):i + int(patch_size[0] / 2),
                         j - int(patch_size[1] / 2):j + int(patch_size[1] / 2)]
                 patch_extra_layer = extra_layer[i - int(patch_size[0] / 2):i + int(patch_size[0] / 2),
@@ -49,10 +52,14 @@ def get_trainings_patches(complete_list):
                 if (patch.shape != (patch_size[0], patch_size[1], 1 )):
                     #print(patch.shape)
                     continue
-                patch = np.reshape(patch, (32,32,1))
-                patch = np.concatenate((patch, patch_extra_layer[:, :, np.newaxis]), axis=2)
-                if (patch.shape != (patch_size[0], patch_size[1], 2)):
-                    continue
+                patch = np.reshape(patch, (patch_size[0],patch_size[1],1))
+                if (extra_layer_bool):
+                    patch = np.concatenate((patch, patch_extra_layer[:, :, np.newaxis]), axis=2)
+                    if (patch.shape != (patch_size[0], patch_size[1], 2)):
+                        continue
+                else:
+                    if (patch.shape != (patch_size[0], patch_size[1], 1)):
+                        continue
                 patches.append(patch)
                 label = np.reshape(mask[i][j][0], 1)[0]
                 labels.append(label)
