@@ -18,8 +18,9 @@ def make_patches_prediction(image, patch_size, extra_layer_bool=True):
         for j in range(patch_size[1] + 1, image.shape[1] - patch_size[1]):
             patch = image[i - int(patch_size[0] / 2):i + int(patch_size[0] / 2),
                     j - int(patch_size[1] / 2):j + int(patch_size[1] / 2)]
-            patch_extra_layer = extra_layer[i - int(patch_size[0] / 2):i + int(patch_size[0] / 2),
-                                j - int(patch_size[1] / 2):j + int(patch_size[1] / 2)]
+            if (extra_layer_bool):
+                patch_extra_layer = extra_layer[i - int(patch_size[0] / 2):i + int(patch_size[0] / 2),
+                                    j - int(patch_size[1] / 2):j + int(patch_size[1] / 2)]
             #print(patch.shape)
             #if (patch.shape != (patch_size[0], patch_size[1])):
             if (patch.shape != (patch_size[0], patch_size[1], 1)):
@@ -55,7 +56,7 @@ def make_mask_predictions(image, patch_size = (32,32), extra_layer_bool=True , m
 
 def make_mask_predictions_batch(image_list, patch_size = (32,32), extra_layer_bool=True, model =get_model()):
     result_list = []
-    print(len(image_list))
+    #print(len(image_list))
     for image in image_list:
         original = image
         patches = make_patches_prediction(image, patch_size, extra_layer_bool)

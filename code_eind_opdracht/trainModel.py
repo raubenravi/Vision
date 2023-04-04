@@ -32,6 +32,6 @@ def train_model(patches, labels, patch_size=(32, 32), extra_layer_bool=True):
     # print(patches.shape)
     # print(labels.shape)
     # print(labels[0])
-    model.fit(patches, labels, epochs=1)
+    model.fit(patches, labels, epochs=10)
     # model.save('saved_model/my_model')
     return model

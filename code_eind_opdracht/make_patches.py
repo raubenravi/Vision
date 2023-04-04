@@ -47,8 +47,9 @@ def get_trainings_patches(complete_list, patch_size = (32,32), extra_layer_bool 
             for j in range(patch_size[1] + 1, image.shape[1], 32):
                 patch = image[i - int(patch_size[0] / 2):i + int(patch_size[0] / 2),
                         j - int(patch_size[1] / 2):j + int(patch_size[1] / 2)]
-                patch_extra_layer = extra_layer[i - int(patch_size[0] / 2):i + int(patch_size[0] / 2),
-                        j - int(patch_size[1] / 2):j + int(patch_size[1] / 2)]
+                if(extra_layer_bool):
+                    patch_extra_layer = extra_layer[i - int(patch_size[0] / 2):i + int(patch_size[0] / 2),
+                            j - int(patch_size[1] / 2):j + int(patch_size[1] / 2)]
                 if (patch.shape != (patch_size[0], patch_size[1], 1 )):
                     #print(patch.shape)
                     continue

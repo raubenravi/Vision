@@ -1,0 +1,5 @@
+0.8009761657004112 accuracy of prediction with patch (16, 16)
+0.8176171180452217 accuracy of prediction with patch (20, 20)
+0.781263665090798 accuracy of prediction with patch (24, 24)
+0.7375678989145124 accuracy of prediction with patch (28, 28)
+0.7386803019235452 accuracy of prediction with patch (32, 32)
