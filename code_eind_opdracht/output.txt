@@ -3,3 +3,4 @@
 0.781263665090798 accuracy of prediction with patch (24, 24)
 0.7375678989145124 accuracy of prediction with patch (28, 28)
 0.7386803019235452 accuracy of prediction with patch (32, 32)
+0.7458124432438207 accuracy of prediction with patch and with extra layer 6 n (20, 20)

@@ -12,7 +12,7 @@ def recreate_image(codebook, labels, w, h):
     return codebook[labels].reshape(w, h, -1)
 
 
-def splitIntoReducedColors(img, kmean_clusters = 10):
+def splitIntoReducedColors(img, kmean_clusters = 20):
 
     img = np.array(img, dtype=np.float64) / 255
     w, h, d = original_shape = tuple(img.shape)
@@ -48,12 +48,12 @@ def EvulateMask(masks = []):
     return best_Mask
 
 
-def make_mask_list(image_list):
+def make_mask_list(image_list, n_clusters=20):
     list_with_best_masks = []
     for i in range(len(image_list)):
-        masks = splitIntoReducedColors(image_list[i])
+        masks = splitIntoReducedColors(image_list[i], kmean_clusters=n_clusters)
         list_with_best_masks.append(EvulateMask(masks=masks))
     return list_with_best_masks
 
-def make_mask(image):
-    return EvulateMask(masks = splitIntoReducedColors(image))
+def make_mask(image, n_clusters=20):
+    return EvulateMask(masks = splitIntoReducedColors(image, kmean_clusters=n_clusters))

@@ -14,7 +14,8 @@ def load_mask(mask_name, path):
 
     return mask
 
-
+#zo staat het in mijn folder
+#\Vision\code_eind_opdracht\data\Mask\0.png"
 def get_list_of_mask_and_image(start, end, path="./data"):
     path_meta_data = path + "/metadata.csv"
     df_meta_data = pd.read_csv(path_meta_data)
